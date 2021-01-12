@@ -13,6 +13,19 @@
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
+(cond
+ (IS-MAC
+  (setq mac-command-modifier      'meta
+        ns-command-modifier       'meta
+        mac-option-modifier       'none
+        ns-option-modifier        'none
+        ;; Free up the right option for character composition
+        mac-right-option-modifier 'none
+        ns-right-option-modifier  'none))
+ (IS-WINDOWS
+  (setq w32-lwindow-modifier 'super
+        w32-rwindow-modifier 'super)))
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
