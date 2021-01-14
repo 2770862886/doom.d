@@ -21,6 +21,8 @@ ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications/Emacs.app
 # Install
 
 ``` sh
+git clone https://github.com/2770862886/doom.d.git ~/.doom.d
+
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
 ```
