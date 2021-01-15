@@ -17,6 +17,10 @@ brew tap d12frosted/emacs-plus
 brew install emacs-plus
 ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications/Emacs.app
 ```
+* vterm
+``` sh
+brew install libvterm
+```
 
 # Install
 
