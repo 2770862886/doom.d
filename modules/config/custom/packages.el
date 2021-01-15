@@ -6,3 +6,6 @@
 
 (package! move-dup
   :recipe (:host github :repo "wyuenho/move-dup"))
+
+(package! immortal-scratch
+  :recipe (:host github :repo "jpkotta/immortal-scratch"))

@@ -10,6 +10,8 @@
       user-mail-address "albert.leung@live.cn")
 
 (setq fancy-splash-image "~/.doom.d/logo/logo2.png")
+(setq-default initial-scratch-message
+              (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
@@ -51,8 +53,11 @@
 
 (setq org-reverse-note-order t)
 
-(after! org
+(after! deft
+  (setq deft-recursive t)
+  )
 
+(after! org
   (setq org-capture-templates
         `(("i" "Inbox" entry (file+headline ,(concat org-directory "inbox.org") "Inbox")
            "* TODO %?\n %i")
@@ -127,8 +132,7 @@
 
   (setq org-agenda-text-search-extra-files
         (list (concat org-directory "somedaymaybe.org")
-              (concat org-directory "note.org")))
-  )
+              (concat org-directory "note.org"))))
 
 ;; #### Add global function for org interactive function
 (defun inbox ()
@@ -153,11 +157,9 @@
   (find-file (concat org-directory "note.org")))
 ;; ####
 
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

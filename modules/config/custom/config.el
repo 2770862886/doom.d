@@ -42,6 +42,12 @@
    "C-c u" 'md-duplicate-up
    "C-c d" 'md-duplicate-down))
 
+(use-package! immortal-scratch
+  :init
+  (add-hook! 'after-init-hook #'immortal-scratch-mode)
+  (setq initial-scratch-message
+        (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n")))
+
 (map!
  "C-x C-m" 'counsel-M-x
  "C-M-<backspace>" 'kill-back-to-indentation
