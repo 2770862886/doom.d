@@ -37,10 +37,10 @@
 (use-package! move-dup
   :config
   (map!
-   "M-<up>" 'md-move-lines-up
-   "M-<down>" 'md-move-lines-down
-   "C-c u" 'md-duplicate-up
-   "C-c d" 'md-duplicate-down))
+   "M-<up>" 'move-dup-move-lines-up
+   "M-<down>" 'move-dup-move-lines-down
+   "C-c u" 'move-dup-duplicate-up
+   "C-c d" 'move-dup-duplicate-down))
 
 (use-package! immortal-scratch
   :init
@@ -56,4 +56,5 @@
  "C-x C-k" 'kill-region
  "C-x 2" (split-window-func-with-other-buffer 'split-window-vertically)
  "C-x 3" (split-window-func-with-other-buffer 'split-window-horizontally)
+ "C-c p w" 'projectile-ag
  )

@@ -69,7 +69,7 @@
            "* %?\n %i")
           ("y" "Maybe" entry (file+headline ,(concat org-directory "somedaymaybe.org") "Maybe")
            "* %?\n %i")
-          ("n" "Note" entry (file+olp+datetree ,(concat org-directory "note.org"))
+          ("n" "Note" entry (file+headline ,(concat org-directory "note.org") "Notes")
            "* %?\n %i")
           ("g" "Goal" entry (file+headline ,(concat org-directory "goals.org") "Goals")
            "* %?\n %i")
