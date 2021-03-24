@@ -9,3 +9,6 @@
 
 (package! immortal-scratch
   :recipe (:host github :repo "jpkotta/immortal-scratch"))
+
+(package! dired+
+  :recipe (:host github :repo "emacsmirror/dired-plus"))

@@ -48,6 +48,10 @@
   (setq initial-scratch-message
         (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n")))
 
+;;(use-package! dired+
+;;  :config
+;;  (diredp-toggle-find-file-reuse-dir 1))
+
 (map!
  "C-x C-m" 'counsel-M-x
  "C-M-<backspace>" 'kill-back-to-indentation
