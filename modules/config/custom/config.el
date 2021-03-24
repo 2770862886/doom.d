@@ -57,4 +57,5 @@
  "C-x 2" (split-window-func-with-other-buffer 'split-window-vertically)
  "C-x 3" (split-window-func-with-other-buffer 'split-window-horizontally)
  "C-c p w" 'projectile-ag
+ "C-c k" 'revert-buffer-with-coding-system
  )
