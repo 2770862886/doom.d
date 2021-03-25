@@ -52,6 +52,11 @@
 ;;  :config
 ;;  (diredp-toggle-find-file-reuse-dir 1))
 
+(use-package! adoc-mode
+  :init
+  (add-to-list 'auto-mode-alist (cons "\\.adoc\\'" 'adoc-mode))
+  (add-hook 'adoc-mode-hook (lambda() (buffer-face-mode t))))
+
 (map!
  "C-x C-m" 'counsel-M-x
  "C-M-<backspace>" 'kill-back-to-indentation

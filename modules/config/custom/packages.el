@@ -12,3 +12,6 @@
 
 ;;(package! dired+
 ;;  :recipe (:host github :repo "emacsmirror/dired-plus"))
+
+(package! adoc-mode
+  :recipe (:host github :repo "sensorflo/adoc-mode"))
