@@ -45,7 +45,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-dark+)
+(setq doom-theme 'doom-1337)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -137,6 +137,9 @@
   (setq org-agenda-text-search-extra-files
         (list (concat org-directory "somedaymaybe.org")
               (concat org-directory "note.org"))))
+
+(after! js2-mode
+   (setq js2-basic-offset 4))
 
 ;; #### Add global function for org interactive function
 (defun inbox ()

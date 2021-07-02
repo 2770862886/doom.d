@@ -1,5 +1,8 @@
 ;;; config/config.el -*- lexical-binding: t; -*-
 
+(setq tab-width 4
+      indent-tabs-mode nil)
+
 (defun kill-back-to-indentation ()
   "Kill from point back to the first non-whitespace character on the line."
   (interactive)
@@ -19,7 +22,6 @@
 
 (global-set-key (kbd "C-x 2") (split-window-func-with-other-buffer 'split-window-vertically))
 (global-set-key (kbd "C-x 3") (split-window-func-with-other-buffer 'split-window-horizontally))
-
 
 (use-package! winum
   :init (winum-mode)
