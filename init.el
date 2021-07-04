@@ -199,5 +199,5 @@
        (default +bindings +smartparens)
 
        :private
-       custom              ; migrate from old config By LiangChao 2020.12.31
+       default              ; migrate from old config By LiangChao 2020.12.31
 )

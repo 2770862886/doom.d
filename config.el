@@ -138,7 +138,7 @@
         (list (concat org-directory "somedaymaybe.org")
               (concat org-directory "note.org"))))
 
-(after! js2-mode
+(after! rjsx-mode
    (setq js2-basic-offset 4))
 
 ;; #### Add global function for org interactive function
