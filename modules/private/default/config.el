@@ -72,4 +72,6 @@
  "C-x 3" (split-window-func-with-other-buffer 'split-window-horizontally)
  "C-c p w" 'projectile-ag
  "C-c k" 'revert-buffer-with-coding-system
+ "C-:" 'avy-goto-char-2
+ "C-\"" 'avy-goto-word-or-subword-1
  )
