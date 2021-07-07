@@ -136,7 +136,11 @@
 
   (setq org-agenda-text-search-extra-files
         (list (concat org-directory "somedaymaybe.org")
-              (concat org-directory "note.org"))))
+              (concat org-directory "note.org")))
+
+  (setq org-archive-location (concat "archive/archive-"
+                                   (format-time-string "%Y%m" (current-time)) ".org_archive::"))
+  )
 
 (after! rjsx-mode
    (setq js2-basic-offset 4))

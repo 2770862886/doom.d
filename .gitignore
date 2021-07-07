@@ -1,0 +1,5 @@
+.DS_Store
+custom.el
+.idea
+*.log
+tmp/
