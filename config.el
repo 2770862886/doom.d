@@ -139,11 +139,27 @@
               (concat org-directory "note.org")))
 
   (setq org-archive-location (concat "archive/archive-"
-                                   (format-time-string "%Y%m" (current-time)) ".org_archive::"))
+                                     (format-time-string "%Y%m" (current-time)) ".org_archive::"))
+  (setq org-publish-project-alist
+        '(("org-notes"
+           :base-directory "~/notes/tech/"
+           :base-extension "org"
+           :publishing-directory "~/notes/public/html"
+           :recursive t
+           :publishing-function org-html-publish-to-html
+           :headline-levels 4
+           :auto-preamble t)
+          ("org-static"
+           :base-directory "~/notes/tech"
+           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+           :publishing-directory "~/note/public/html"
+           :recursive t
+           :publishing-function org-publish-attachment)
+          ("org" :components ("org-notes" "org-static"))))
   )
 
-(after! rjsx-mode
-   (setq js2-basic-offset 4))
+;;(after! rjsx-mode
+;;   (setq js2-basic-offset 4))
 
 ;; #### Add global function for org interactive function
 (defun inbox ()
