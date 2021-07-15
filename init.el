@@ -55,7 +55,7 @@
        :editor
        ;(evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
-       fold              ; (nigh) universal code folding
+       ;;fold              ; (nigh) universal code folding
        ;;(format +onsave)  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
@@ -82,13 +82,13 @@
        :checkers
        syntax              ; tasing you for every semicolon you forget
        (spell +flyspell)   ; tasing you for misspelling mispelling
-       ;;grammar           ; tasing grammar mistake every you make
+       grammar             ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
        ;;direnv
-       ;;docker
+       docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
