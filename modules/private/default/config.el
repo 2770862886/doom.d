@@ -1,7 +1,11 @@
 ;;; config/config.el -*- lexical-binding: t; -*-
 
-(setq tab-width 4
-      indent-tabs-mode nil)
+(setq indent-tabs-mode nil
+      show-trailing-whitespace t
+      tab-width 4
+      scroll-step 1
+      scroll-margin 3
+      scroll-conservatively 10000)
 
 (defun kill-back-to-indentation ()
   "Kill from point back to the first non-whitespace character on the line."
