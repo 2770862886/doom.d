@@ -15,3 +15,6 @@
 
 (package! adoc-mode
   :recipe (:host github :repo "sensorflo/adoc-mode"))
+
+(package! goto-chg
+  :recipe (:host github :repo "emacs-evil/goto-chg"))

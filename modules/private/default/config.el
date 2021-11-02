@@ -66,6 +66,12 @@
   (add-to-list 'auto-mode-alist (cons "\\.adoc\\'" 'adoc-mode))
   (add-hook 'adoc-mode-hook (lambda() (buffer-face-mode t))))
 
+(use-package! goto-chg
+  :config
+  (map!
+   "C-," 'goto-last-change
+   "C-." 'goto-last-change-reverse))
+
 (map!
  "C-x C-m" 'counsel-M-x
  "C-M-<backspace>" 'kill-back-to-indentation
