@@ -78,4 +78,5 @@
  "C-c k" 'revert-buffer-with-coding-system
  "C-:" 'avy-goto-char-2
  "C-\"" 'avy-goto-word-or-subword-1
+ "C-x /" 'comment-or-uncomment-region
  )
