@@ -27,6 +27,15 @@
 (global-set-key (kbd "C-x 2") (split-window-func-with-other-buffer 'split-window-vertically))
 (global-set-key (kbd "C-x 3") (split-window-func-with-other-buffer 'split-window-horizontally))
 
+(defun edit-current-file-as-root ()
+  "Edit the file that is associated with the current buffer as root"
+  (interactive)
+  (let ((filep (buffer-file-name)))
+    (if filep (find-file (concat "/sudo::" filep))
+      (message "Current buffer does not have an associated file."))))
+
+(global-set-key (kbd "C-c o e") 'edit-current-file-as-root)
+
 (use-package! winum
   :init (winum-mode)
   :config
