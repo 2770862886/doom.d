@@ -73,7 +73,7 @@
    "C-." 'goto-last-change-reverse))
 
 (map!
- "C-x C-m" 'counsel-M-x
+ "C-x C-m" 'execute-extended-command
  "C-M-<backspace>" 'kill-back-to-indentation
  "C-w" 'backward-kill-word
  "S-SPC" 'set-mark-command
