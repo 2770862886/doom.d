@@ -10,11 +10,14 @@
 (package! immortal-scratch
   :recipe (:host github :repo "jpkotta/immortal-scratch"))
 
-;;(package! dired+
-;;  :recipe (:host github :repo "emacsmirror/dired-plus"))
-
 (package! adoc-mode
   :recipe (:host github :repo "sensorflo/adoc-mode"))
 
 (package! goto-chg
   :recipe (:host github :repo "emacs-evil/goto-chg"))
+
+(package! tmtxt-async-tasks
+  :recipe (:host github :repo "tmtxt/tmtxt-async-tasks"))
+
+(package! tmtxt-dired-async
+  :recipe (:host github :repo "tmtxt/tmtxt-dired-async"))
