@@ -7,13 +7,6 @@
       scroll-margin 3
       scroll-conservatively 10000)
 
-(defun kill-back-to-indentation ()
-  "Kill from point back to the first non-whitespace character on the line."
-  (interactive)
-  (let ((prev-pos (point)))
-    (back-to-indentation)
-    (kill-region (point) prev-pos)))
-
 (defun split-window-func-with-other-buffer (split-function)
   (lambda (&optional arg)
     "Split this window and switch to the new window unless ARG is provided."
@@ -89,12 +82,13 @@
    "C-c C-d" 'tda/rsync-multiple-remove-item
    "C-c C-v" 'tda/rsync-multiple
    "C-c C-l" 'tda/download-clipboard-link-to-current-dir
+   "C-c C-q" 'tda/download-to-current-dir
    "C-c C-s" 'tmtxt/dired-async-get-file-size
    ))
 
 (map!
  "C-x C-m" 'execute-extended-command
- "C-M-<backspace>" 'kill-back-to-indentation
+ "S-<backspace>" 'doom/backward-kill-to-bol-and-indent
  "C-w" 'backward-kill-word
  "S-SPC" 'set-mark-command
  "C-x C-k" 'kill-region
