@@ -70,21 +70,21 @@
    "C-," 'goto-last-change
    "C-." 'goto-last-change-reverse))
 
-(use-package! tmtxt-async-tasks)
-(use-package! tmtxt-dired-async
-  :config
-  (map!
-   "C-c C-r" 'tda/rsync
-   "C-c C-z" 'tda/zip
-   "C-c C-u" 'tda/unzip
-   "C-c C-a" 'tda/rsync-multiple-mark-file
-   "C-c C-e" 'tda/rsync-multiple-empty-list
-   "C-c C-d" 'tda/rsync-multiple-remove-item
-   "C-c C-v" 'tda/rsync-multiple
-   "C-c C-l" 'tda/download-clipboard-link-to-current-dir
-   "C-c C-q" 'tda/download-to-current-dir
-   "C-c C-s" 'tmtxt/dired-async-get-file-size
-   ))
+;; (use-package! tmtxt-async-tasks)
+;; (use-package! tmtxt-dired-async
+;;   :config
+;;   (map!
+;;    "C-c C-r" 'tda/rsync
+;;    "C-c C-z" 'tda/zip
+;;    "C-c C-u" 'tda/unzip
+;;    "C-c C-a" 'tda/rsync-multiple-mark-file
+;;    "C-c C-e" 'tda/rsync-multiple-empty-list
+;;    "C-c C-d" 'tda/rsync-multiple-remove-item
+;;    "C-c C-v" 'tda/rsync-multiple
+;;    "C-c C-l" 'tda/download-clipboard-link-to-current-dir
+;;    "C-c C-q" 'tda/download-to-current-dir
+;;    "C-c C-s" 'tmtxt/dired-async-get-file-size
+;;    ))
 
 (map!
  "C-x C-m" 'execute-extended-command

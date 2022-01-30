@@ -45,7 +45,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-material)
+(setq doom-theme 'doom-dark+)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -83,16 +83,17 @@
            "* %U - %^{heading}\n %?")))
 
   (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
+        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
                 (sequence "PROJECT(p)" "|" "DONE(d!/!)" "CANCELLED(c@/!)")
                 (sequence "WAITING(w@/!)" "DELEGATED(e!)" "HOLD(h)" "|" "CANCELLED(c@/!)"))))
 
   (setq org-todo-keyword-faces
         (quote (("TODO" :foreground "red" :weight bold)
-                ("STARTED" :foreground "DeepSkyBlue3" :weight bold)
-                ("WAITING" :foreground "orange" :weight bold)
-                ("HOLD" :foreground "magenta" :weight bold)
+                ("NEXT" :foreground "DeepSkyBlue3" :weight bold)
                 ("DONE" :foreground "forest green" :weight bold)
+                ("WAITING" :foreground "orange" :weight bold)
+                ("DELEGATED" :foreground "purple" :weight bold)
+                ("HOLD" :foreground "magenta" :weight bold)
                 ("CANCELLED" :foreground "forest green" :weight bold)
                 ("PROJECT" :foreground "DeepPink3" :weight bold))))
 
