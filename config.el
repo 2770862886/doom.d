@@ -183,6 +183,10 @@
   "Used to open note, which is not belong to todos and work."
   (interactive)
   (find-file (concat org-directory "note.org")))
+
+(require 'exec-path-from-shell)
+(when (display-graphic-p)
+  (exec-path-from-shell-initialize))
 ;; ####
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
