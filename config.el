@@ -53,10 +53,6 @@
 
 (setq org-reverse-note-order t)
 
-(after! deft
-  (setq deft-recursive t)
-  )
-
 (after! org
   (setq org-capture-templates
         `(("i" "Inbox" entry (file+headline ,(concat org-directory "inbox.org") "Inbox")
@@ -159,8 +155,29 @@
           ("org" :components ("org-notes" "org-static"))))
   )
 
-;;(after! rjsx-mode
-;;   (setq js2-basic-offset 4))
+(use-package org-roam
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/CloudStation/Org/roam")
+  (org-roam-complete-everywhere t)
+  :bind (("C-c n b" . org-roam-buffer-toggle)
+         ("C-c n r b" . org-roam-update-org-id-locations)
+         :map org-mode-map
+         ("C-M-i" . completion-at-point))
+  :config
+  (org-roam-setup))
+
+ (use-package deft
+    :config
+    (setq deft-directory org-directory
+          deft-recursive t
+          deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"
+          deft-use-filename-as-title t))
+
+(after! rjsx-mode
+  (setq js2-basic-offset 4))
 
 ;; #### Add global function for org interactive function
 (defun inbox ()
