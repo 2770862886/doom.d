@@ -54,6 +54,13 @@
 (setq org-reverse-note-order t)
 
 (after! org
+  (org-babel-do-load-languages
+     'org-babel-load-languages
+     (append org-babel-load-languages
+       '((C             . t)
+         (python        . t)))
+     )
+
   (setq org-capture-templates
         `(("i" "Inbox" entry (file+headline ,(concat org-directory "inbox.org") "Inbox")
            "* TODO %?\n %i")
@@ -162,12 +169,48 @@
   :custom
   (org-roam-directory "~/CloudStation/Org/roam")
   (org-roam-complete-everywhere t)
+  (org-roam-capture-templates '(
+                ("d" "default" plain "%?"
+                 :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                            "#+title: ${title}\n")
+                 :unnarrowed t)
+                ("b" "book reading" plain "%?"
+                 :target (file+head "book/%<%Y%m%d%H%M%S>-${slug}.org"
+                            "#+title: ${title}\n")
+                 :unnarrowed t)
+                ))
   :bind (("C-c n b" . org-roam-buffer-toggle)
          ("C-c n r b" . org-roam-update-org-id-locations)
          :map org-mode-map
          ("C-M-i" . completion-at-point))
   :config
   (org-roam-setup))
+
+(use-package! websocket
+  :after org-roam)
+
+(use-package! org-roam-ui
+  :after org-roam
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
+
+;; (use-package org-roam-bibtex
+;;   :init
+;;   (org-roam-bibtex-mode 1)
+;;   :custom
+;;   (orb-note-actions-interface 'default)
+;;   )
+;;自动创建笔记的创建时间和修改时间
+(use-package! org-roam-timestamps
+  :after org-roam
+  :config
+  (org-roam-timestamps-mode))
+;;跨文件的引用，能够实现笔记的一处修改，处处修改。
+(use-package! org-transclusion
+  :after org-roam)
 
  (use-package deft
     :config

@@ -50,3 +50,12 @@
 ;(unpin! t)
 
 (package! exec-path-from-shell)
+
+(package! org-roam-timestamps
+  :recipe (:host github :repo "ThomasFKJorna/org-roam-timestamps"))
+
+(package! org-transclusion
+  :recipe (:host github :repo "nobiot/org-transclusion"))
+
+(unpin! org-roam)
+(package! org-roam-ui)
