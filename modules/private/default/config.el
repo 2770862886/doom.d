@@ -20,15 +20,6 @@
 (global-set-key (kbd "C-x 2") (split-window-func-with-other-buffer 'split-window-vertically))
 (global-set-key (kbd "C-x 3") (split-window-func-with-other-buffer 'split-window-horizontally))
 
-(defun edit-current-file-as-root ()
-  "Edit the file that is associated with the current buffer as root"
-  (interactive)
-  (let ((filep (buffer-file-name)))
-    (if filep (find-file (concat "/sudo::" filep))
-      (message "Current buffer does not have an associated file."))))
-
-(global-set-key (kbd "C-c o e") 'edit-current-file-as-root)
-
 (use-package! winum
   :init (winum-mode)
   :config
@@ -86,7 +77,6 @@
 ;;    "C-c C-s" 'tmtxt/dired-async-get-file-size
 ;;    ))
 
-
 (eval-after-load "dired"
   '(progn
      (defadvice dired-advertised-find-file (around dired-subst-directory activate)
@@ -137,10 +127,11 @@
  "C-x C-k" 'kill-region
  "C-x 2" (split-window-func-with-other-buffer 'split-window-vertically)
  "C-x 3" (split-window-func-with-other-buffer 'split-window-horizontally)
- "C-c p w" 'projectile-ag
  "C-c k" 'revert-buffer-with-coding-system
  "C-:" 'avy-goto-char-2
  "C-\"" 'avy-goto-word-or-subword-1
  "C-x /" 'comment-or-uncomment-region
  "C-c C-p" 'org-mark-ring-goto
+ "C-c p w" '+vertico/project-search
+ "C-c o s" 'treemacs-select-window
  )

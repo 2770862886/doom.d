@@ -4,7 +4,7 @@
 (use-package elfeed
   :defer t
   :config
-(setq rmh-elfeed-org-files '("~/CloudStation/Org/elfeed.org"))
+(setq rmh-elfeed-org-files '("~/SynologyDrive/Org/elfeed.org"))
   :bind (:map elfeed-search-mode-map
               ;;("j" . next-line)
               ;;("k" . previous-line)

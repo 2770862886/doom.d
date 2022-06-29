@@ -45,11 +45,33 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-dark+)
+(setq doom-theme 'doom-dracula)
+
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  (doom-modeline-height 25)
+  (doom-modeline-bar-width 1)
+  (doom-modeline-icon t)
+  (doom-modeline-major-mode-icon t)
+  (doom-modeline-major-mode-color-icon t)
+  (doom-modeline-buffer-file-name-style 'truncate-upto-project)
+  (doom-modeline-buffer-state-icon t)
+  (doom-modeline-buffer-modification-icon t)
+  (doom-modeline-minor-modes nil)
+  (doom-modeline-enable-word-count nil)
+  (doom-modeline-buffer-encoding t)
+  (doom-modeline-indent-info nil)
+  (doom-modeline-checker-simple-format t)
+  (doom-modeline-vcs-max-length 12)
+  (doom-modeline-env-version t)
+  (doom-modeline-irc-stylize 'identity)
+  (doom-modeline-github-timer nil)
+  (doom-modeline-gnus-timer nil))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/CloudStation/Org/")
+(setq org-directory "~/SynologyDrive/Org/")
 
 (setq org-reverse-note-order t)
 
@@ -58,7 +80,9 @@
      'org-babel-load-languages
      (append org-babel-load-languages
        '((C             . t)
-         (python        . t)))
+         (python        . t)
+         (scheme        . t)
+         ))
      )
 
   (setq org-capture-templates
@@ -167,16 +191,20 @@
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/CloudStation/Org/roam")
+  (org-roam-directory "~/SynologyDrive/Org/roam")
   (org-roam-complete-everywhere t)
   (org-roam-capture-templates '(
                 ("d" "default" plain "%?"
                  :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                            "#+title: ${title}\n")
+                                    "#+TITLE: ${title}\n")
                  :unnarrowed t)
                 ("b" "book reading" plain "%?"
                  :target (file+head "book/%<%Y%m%d%H%M%S>-${slug}.org"
-                            "#+title: ${title}\n")
+                                    "#+TITLE: ${title}\n")
+                 :unnarrowed t)
+                 ("r" "bibliograph reference" plain "%?"
+                  :target (file+head "reference/${citekey}.org"
+                                     "#+TITLE: ${title}\n")
                  :unnarrowed t)
                 ))
   :bind (("C-c n b" . org-roam-buffer-toggle)
@@ -197,17 +225,33 @@
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
 
-;; (use-package org-roam-bibtex
-;;   :init
-;;   (org-roam-bibtex-mode 1)
-;;   :custom
-;;   (orb-note-actions-interface 'default)
-;;   )
-;;自动创建笔记的创建时间和修改时间
-(use-package! org-roam-timestamps
-  :after org-roam
+(use-package! org-ref
+  :after org
   :config
-  (org-roam-timestamps-mode))
+  (setq org-ref-default-bibliography '("~/SynologyDrive/Org/roam/.library.bib")
+        org-ref-notes-function 'orb-edit-note
+        org-ref-completion-library 'org-ref-ivy-cite
+        org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex)
+  (setq bibtex-completion-df-extension '(".pdf" ".djvu")
+        bibtex-completion-bibliography '("~/SynologyDrive/Org/roam/.reference.bib")
+        bibtex-completion-notes-path "~/SynologyDrive/Org/roam/reference"
+        bibtex-completion-pdf-field "file"))
+
+(use-package! org-roam-bibtex
+  :after org-roam
+  :hook (org-roam-mode . org-roam-bibtex-mode)
+  :config
+  (require 'org-ref)
+  (setq orb-preformat-keywords
+        '("citekey" "title" "url" "author-or-editor" "keywords" "file" "year")
+        orb-process-file-keyword t
+        orb-attached-file-extensions '("pdf")
+        orb-note-actions-interface 'default))
+;;自动创建笔记的创建时间和修改时间
+;; (use-package! org-roam-timestamps
+;;   :after org-roam
+;;   :config
+;;   (org-roam-timestamps-mode))
 ;;跨文件的引用，能够实现笔记的一处修改，处处修改。
 (use-package! org-transclusion
   :after org-roam)
