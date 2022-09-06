@@ -156,6 +156,7 @@
         +hugo              ; use Emacs for hugo blogging
         +noter             ; enhanced PDF notetaking
         +jupyter           ; ipython/jupyter support for babel
+        +journal           ;
         +pandoc            ; export-with-pandoc support
         +gnuplot           ; who doesn't like pretty pictures
         +pomodoro          ; be fruitful with the tomato technique
