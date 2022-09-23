@@ -21,3 +21,9 @@
 
 (package! tmtxt-dired-async
   :recipe (:host github :repo "tmtxt/tmtxt-dired-async"))
+
+(package! org-excalidraw
+  :recipe (:host github :repo "wdavew/org-excalidraw"))
+
+(package! anki-editor
+  :recipe (:host github :repo "louietan/anki-editor"))

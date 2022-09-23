@@ -80,9 +80,15 @@
      'org-babel-load-languages
      (append org-babel-load-languages
        '((C             . t)
+         (dot           . t)
+         (emacs-lisp    . t)
+         (gnuplot       . t)
+         (latex         . t)
+         (ledger        . t)
          (python        . t)
+         (ruby          . t)
          (scheme        . t)
-         ))
+         (sh            . t)))
      )
 
   (setq org-capture-templates
@@ -106,6 +112,10 @@
            (file "~/notes/templates/weeklyreviewtemplate.org"))
           ("m" "Review: Monthly Review" entry (file+olp+datetree "/tmp/reviews.org")
            (file "~/notes/templates/monthlyreviewtemplate.org"))
+          ("a" "Anki basic" entry (file+headline org-my-anki-file "Dispatch Shelf")
+               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: Mega\n:END:\n** Front\n%?\n** Back\n%x\n")
+          ("A" "Anki cloze" entry (file+headline org-my-anki-file "Dispatch Shelf")
+               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Mega\n:END:\n** Text\n%x\n** Extra\n")
           ("j" "Journal" entry (file+olp+datetree ,(concat org-directory "journal.org"))
            "* %U - %^{heading}\n %?")))
 
