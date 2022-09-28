@@ -19,8 +19,8 @@
  (IS-MAC
   (setq mac-command-modifier      'meta
         ns-command-modifier       'meta
-        mac-option-modifier       'none
-        ns-option-modifier        'none
+        mac-option-modifier       'super
+        ns-option-modifier        'super
         ;; Free up the right option for character composition
         mac-right-option-modifier 'none
         ns-right-option-modifier  'none))
