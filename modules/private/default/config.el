@@ -145,5 +145,8 @@
  "C-c C-p" 'org-mark-ring-goto
  "C-c p w" '+vertico/project-search
  "C-c o s" 'treemacs-select-window
+ "C-c n a" 'org-capture
+ "C-c n n" 'org-agenda
  "C-c n r u" 'org-roam-ui-mode
+ "C-c n r f" 'org-roam-node-find
  )

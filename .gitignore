@@ -3,3 +3,4 @@ custom.el
 .idea
 *.log
 tmp/
+flycheck_config.el
