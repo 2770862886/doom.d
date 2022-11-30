@@ -15,4 +15,5 @@
 
 (map!
  "C-c r r" 'elfeed
+ "C-c r u" 'elfeed-update
  "C-c r d" 'elfeed-dashboard)
