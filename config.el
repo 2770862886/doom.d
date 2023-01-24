@@ -168,16 +168,22 @@
   (setq org-agenda-files
         (list (concat org-directory "inbox.org")
               (concat org-directory "task.org")
-              (concat org-directory "agenda.org")
-              (concat org-directory "somedaymaybe.org")
+              (concat org-directory "tickler.org")
+              (concat org-directory "someday.org")
               (concat org-directory "goals.org")))
 
   (setq org-agenda-text-search-extra-files
-        (list (concat org-directory "somedaymaybe.org")
+        (list (concat org-directory "someday.org")
               (concat org-directory "note.org")))
+
+  ;(setq org-refile-targets
+  ;      (list ((concat org-directory "task.org") :maxlevel . 3)
+  ;            ((concat org-directory "someday.org") :level . 1)
+  ;            ((concat org-directory "tickler.org") :maxlevel . 2)))
 
   (setq org-archive-location (concat "archive/archive-"
                                      (format-time-string "%Y%m" (current-time)) ".org_archive::"))
+
   (setq org-publish-project-alist
         '(("org-notes"
            :base-directory "~/notes/tech/"
@@ -193,8 +199,7 @@
            :publishing-directory "~/note/public/html"
            :recursive t
            :publishing-function org-publish-attachment)
-          ("org" :components ("org-notes" "org-static"))))
-  )
+          ("org" :components ("org-notes" "org-static")))))
 
 (use-package org-roam
   :ensure t
