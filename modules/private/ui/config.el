@@ -42,5 +42,5 @@
   (advice-add #'save-place-find-file-hook :after #'pulsar-pulse-line)
 
   (let ((map global-map))
-    (define-key map (kbd "C-c h p") #'pulsar-pulse-line)
-    (define-key map (kbd "C-c h h") #'pulsar-highlight-line)))
+    (define-key map (kbd "C-h y") #'pulsar-pulse-line)
+    (define-key map (kbd "C-h h") #'pulsar-highlight-line)))
