@@ -1,5 +1,15 @@
 ;  (setq rmh-elfeed-org-files '("~/SynologyDrive/rss/feeds.org"))
 
+(use-package! org-excalidraw
+  :config
+  (setq org-excalidraw-directory "~/SynologyDrive/draws"))
+
+(use-package! anki-editor
+  :after org
+  :config
+  (setq org-my-anki-file "~/SynologyDrive/anki/anki.org")
+  (setq anki-editor-create-decks 't))
+
 (use-package! elfeed)
 
 (use-package! elfeed-org
