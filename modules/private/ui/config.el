@@ -28,12 +28,18 @@
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 10)
   (setq pulsar-face 'pulsar-magenta)
-  (setq pulsar-highlight-face 'pulsar-yellow)
+  (setq pulsar-highlight-face 'pulsar-cyan)
 
   (pulsar-global-mode 1)
 
+  (add-hook! '(imenu-after-jump-hook
+               better-jumper-post-jump-hook)
+             #'pulsar-pulse-line)
+
   (add-hook 'doom-switch-window-hook #'pulsar-pulse-line)
   (add-hook 'org-follow-link-hook #'pulsar-pulse-line)
+
+  (advice-add #'save-place-find-file-hook :after #'pulsar-pulse-line)
 
   (let ((map global-map))
     (define-key map (kbd "C-c h p") #'pulsar-pulse-line)
