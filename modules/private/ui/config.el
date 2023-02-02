@@ -28,7 +28,7 @@
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 10)
   (setq pulsar-face 'pulsar-magenta)
-  (setq pulsar-highlight-face 'pulsar-cyan)
+  (setq pulsar-highlight-face 'pulsar-magenta)
 
   (pulsar-global-mode 1)
 

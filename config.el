@@ -72,6 +72,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/SynologyDrive/Org/")
+(setq anki-directory "~/SynologyDrive/Anki/")
 
 (setq org-reverse-note-order t)
 
@@ -98,26 +99,29 @@
            "* TODO %?\n %i")
           ("p" "Project" entry (file+headline ,(concat org-directory "task.org") "Projects")
            (file "~/notes/templates/newprojecttemplate.org"))
-          ("s" "Someday" entry (file+headline ,(concat org-directory "somedaymaybe.org") "Someday")
+          ("s" "Someday" entry (file+headline ,(concat org-directory "someday.org") "Someday")
            "* %?\n %i")
-          ("y" "Maybe" entry (file+headline ,(concat org-directory "somedaymaybe.org") "Maybe")
+          ("b" "Maybe" entry (file+headline ,(concat org-directory "someday.org") "Maybe")
            "* %?\n %i")
           ("n" "Note" entry (file+headline ,(concat org-directory "note.org") "Notes")
            "* %?\n %i")
           ("g" "Goal" entry (file+headline ,(concat org-directory "goals.org") "Goals")
            "* %?\n %i")
-          ("d" "Review: Daily Review" entry (file+olp+datetree "/tmp/reviews.org")
-           (file "~/notes/templates/dailyreviewtemplate.org"))
-          ("w" "Review: Weekly Review" entry (file+olp+datetree "/tmp/reviews.org")
-           (file "~/notes/templates/weeklyreviewtemplate.org"))
-          ("m" "Review: Monthly Review" entry (file+olp+datetree "/tmp/reviews.org")
-           (file "~/notes/templates/monthlyreviewtemplate.org"))
-          ("a" "Anki basic" entry (file+headline org-my-anki-file "Dispatch Shelf")
-               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: Mega\n:END:\n** Front\n%?\n** Back\n%x\n")
-          ("A" "Anki cloze" entry (file+headline org-my-anki-file "Dispatch Shelf")
-               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Mega\n:END:\n** Text\n%x\n** Extra\n")
           ("j" "Journal" entry (file+olp+datetree ,(concat org-directory "journal.org"))
-           "* %U - %^{heading}\n %?")))
+           "* %U - %^{heading}\n %?")
+          ("w" "Anki Words" entry (file+headline org-my-anki-file "Vocabulary")
+               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: Vocabulary\n:END:\n** Front\n%?\n** Back\n%x\n")
+          ("c" "Anki cloze" entry (file+headline org-my-anki-file "Dispatch Shelf")
+               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Mega\n:END:\n** Text\n%x\n** Extra\n")
+          ("d" "Review: Daily Review" entry (file+olp+datetree "/tmp/reviews.org")
+           (file "~/Synology/templates/dailyreviewtemplate.org"))
+          ("w" "Review: Weekly Review" entry (file+olp+datetree "/tmp/reviews.org")
+           (file "~/Synology/templates/weeklyreviewtemplate.org"))
+          ("m" "Review: Monthly Review" entry (file+olp+datetree "/tmp/reviews.org")
+           (file "~/Synology/templates/monthlyreviewtemplate.org"))
+          ("y" "Review: Annual Review" entry (file+olp+datetree "/tmp/reviews.org")
+           (file "~/Synology/templates/annualreviewtemplate.org"))
+        ))
 
   (setq org-todo-keywords
         (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
@@ -168,6 +172,7 @@
   (setq org-agenda-files
         (list (concat org-directory "inbox.org")
               (concat org-directory "task.org")
+              (concat org-directory "work.org")
               (concat org-directory "tickler.org")
               (concat org-directory "someday.org")
               (concat org-directory "goals.org")))
@@ -176,10 +181,11 @@
         (list (concat org-directory "someday.org")
               (concat org-directory "note.org")))
 
-  ;(setq org-refile-targets
-  ;      (list ((concat org-directory "task.org") :maxlevel . 3)
-  ;            ((concat org-directory "someday.org") :level . 1)
-  ;            ((concat org-directory "tickler.org") :maxlevel . 2)))
+  (setq org-refile-targets
+        (list ((concat org-directory "task.org") :maxlevel . 3)
+              ((concat org-directory "work.org") :maxlevel . 3)
+              ((concat org-directory "someday.org") :level . 1)
+              ((concat org-directory "tickler.org") :maxlevel . 2)))
 
   (setq org-archive-location (concat "archive/archive-"
                                      (format-time-string "%Y%m" (current-time)) ".org_archive::"))
@@ -302,6 +308,11 @@
   "Used to open note, which is not belong to todos and work."
   (interactive)
   (find-file (concat org-directory "note.org")))
+
+(defun anki ()
+  "Used to open default anki file."
+  (interactive)
+  (find-file "~/SynologyDrive/anki/anki.org"))
 
 (require 'exec-path-from-shell)
 (when (display-graphic-p)
