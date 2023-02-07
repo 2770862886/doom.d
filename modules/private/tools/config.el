@@ -1,8 +1,25 @@
 ;  (setq rmh-elfeed-org-files '("~/SynologyDrive/rss/feeds.org"))
 
-(use-package! org-excalidraw
-  :config
-  (setq org-excalidraw-directory "~/SynologyDrive/draws"))
+;; (use-package! org-excalidraw
+;;   :config
+;;   (setq org-excalidraw-directory "~/SynologyDrive/draws"))
+
+
+(after! org
+  (org-link-set-parameters "excalidraw" 'org-excalidraw-open)
+
+  (defun org-excalidraw-open (name)
+    "Open Excalidraw"
+    (let* ((excalidraw-appdata-root "~/SynologyDrive/draws")
+           (excalidraw-empty-file (f-join excalidraw-appdata-root ".empty.excalidraw"))
+           (excalidraw-path (f-join excalidraw-appdata-root (concat name ".excalidraw")))
+           (excalidraw-export-path (f-join excalidraw-appdata-root "Exports" (concat name ".svg"))))
+      (unless (f-exists? excalidraw-path) (f-copy excalidraw-empty-file excalidraw-path))
+      (quiet! (shell-command (concat "open " (shell-quote-argument excalidraw-path))))
+      (message (concat "Openning " excalidraw-path))
+      ))
+)
+
 
 (use-package! anki-editor
   :after org

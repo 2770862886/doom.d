@@ -73,6 +73,7 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/SynologyDrive/Org/")
 (setq anki-directory "~/SynologyDrive/Anki/")
+(setq template-directory "~/SynologyDrive/templates/")
 
 (setq org-reverse-note-order t)
 
@@ -98,7 +99,7 @@
           ("t" "Task" entry (file+headligne ,(concat org-directory "task.org") "Tasks")
            "* TODO %?\n %i")
           ("p" "Project" entry (file+headline ,(concat org-directory "task.org") "Projects")
-           (file "~/notes/templates/newprojecttemplate.org"))
+           (file (concat template-directory "newprojecttemplate.org")))
           ("s" "Someday" entry (file+headline ,(concat org-directory "someday.org") "Someday")
            "* %?\n %i")
           ("b" "Maybe" entry (file+headline ,(concat org-directory "someday.org") "Maybe")
@@ -114,13 +115,13 @@
           ("c" "Anki cloze" entry (file+headline org-my-anki-file "Dispatch Shelf")
                "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Mega\n:END:\n** Text\n%x\n** Extra\n")
           ("d" "Review: Daily Review" entry (file+olp+datetree "/tmp/reviews.org")
-           (file "~/Synology/templates/dailyreviewtemplate.org"))
+           (file (concat template-directory "dailyreviewtemplate.org")))
           ("w" "Review: Weekly Review" entry (file+olp+datetree "/tmp/reviews.org")
-           (file "~/Synology/templates/weeklyreviewtemplate.org"))
+           (file (concat template-directory "weeklyreviewtemplate.org")))
           ("m" "Review: Monthly Review" entry (file+olp+datetree "/tmp/reviews.org")
-           (file "~/Synology/templates/monthlyreviewtemplate.org"))
+           (file (concat template-directory "monthlyreviewtemplate.org")))
           ("y" "Review: Annual Review" entry (file+olp+datetree "/tmp/reviews.org")
-           (file "~/Synology/templates/annualreviewtemplate.org"))
+           (file (concat template-directory "annualreviewtemplate.org")))
         ))
 
   (setq org-todo-keywords
@@ -181,11 +182,13 @@
         (list (concat org-directory "someday.org")
               (concat org-directory "note.org")))
 
-  (setq org-refile-targets
-        (list ((concat org-directory "task.org") :maxlevel . 3)
-              ((concat org-directory "work.org") :maxlevel . 3)
-              ((concat org-directory "someday.org") :level . 1)
-              ((concat org-directory "tickler.org") :maxlevel . 2)))
+  ;; (setq org-refile-targets
+  ;;       '(
+  ;;         ((concat org-directory "task.org") :maxlevel . 3)
+  ;;         ((concat org-directory "work.org") :maxlevel . 3)
+  ;;         ((concat org-directory "someday.org") :level . 1)
+  ;;         ((concat org-directory "tickler.org") :maxlevel . 2)
+  ;;         ))
 
   (setq org-archive-location (concat "archive/archive-"
                                      (format-time-string "%Y%m" (current-time)) ".org_archive::"))
