@@ -87,6 +87,7 @@
  "C-c p w" '+vertico/project-search
  "C-c o s" 'treemacs-select-window
  "C-c n i" 'inbox
+ "C-c n w" 'work
  "C-c n r u" 'org-roam-ui-mode
  "C-:" 'avy-goto-char-2
  "C-\"" 'avy-goto-word-or-subword-1

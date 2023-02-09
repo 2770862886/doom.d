@@ -4,9 +4,8 @@
 ;;   :config
 ;;   (setq org-excalidraw-directory "~/SynologyDrive/draws"))
 
-
 (after! org
-  (org-link-set-parameters "excalidraw" 'org-excalidraw-open)
+  ;(org-link-set-parameters "excalidraw" 'org-excalidraw-open)
 
   (defun org-excalidraw-open (name)
     "Open Excalidraw"

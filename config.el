@@ -236,7 +236,7 @@
          :map org-mode-map
          ("C-M-i" . completion-at-point))
   :config
-  (org-roam-setup))
+  (org-roam-db-autosync-enable))
 
 (use-package! websocket
   :after org-roam)
