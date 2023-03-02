@@ -7,6 +7,8 @@
       scroll-margin 3
       scroll-conservatively 10000)
 
+(setq consult-locate-command "mdfind -name")
+
 (defun split-window-func-with-other-buffer (split-function)
   (lambda (&optional arg)
     "Split this window and switch to the new window unless ARG is provided."
@@ -91,4 +93,5 @@
  "C-c n r u" 'org-roam-ui-mode
  "C-:" 'avy-goto-char-2
  "C-\"" 'avy-goto-word-or-subword-1
+ "C-c c b" 'lsp-treemacs-symbols
  )
