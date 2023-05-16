@@ -44,3 +44,6 @@
   (let ((map global-map))
     (define-key map (kbd "C-h y") #'pulsar-pulse-line)
     (define-key map (kbd "C-h h") #'pulsar-highlight-line)))
+
+(map!
+ "C-x w o" 'ace-swap-window)
