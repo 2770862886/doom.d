@@ -88,6 +88,7 @@
          (latex         . t)
          (ledger        . t)
          (python        . t)
+         (racket        . t)
          (ruby          . t)
          (scheme        . t)
          (sh            . t)))
@@ -289,6 +290,9 @@
 
 (after! rjsx-mode
   (setq js2-basic-offset 4))
+
+(use-package! ob-racket
+  :after racket-mode-hook)
 
 ;; #### Add global function for org interactive function
 (defun inbox ()

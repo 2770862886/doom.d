@@ -65,3 +65,6 @@
 
 (unpin! org-roam)
 (package! org-roam-ui)
+
+(package! ob-racket
+  :recipe (:host github :repo "hasu/emacs-ob-racket"))
