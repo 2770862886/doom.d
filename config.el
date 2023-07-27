@@ -250,34 +250,32 @@
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
 
-(use-package! org-ref
-  :after org
-  :config
-  (setq org-ref-default-bibliography '("~/SynologyDrive/Org/roam/.library.bib")
-        org-ref-notes-function 'orb-edit-note
-        org-ref-completion-library 'org-ref-ivy-cite
-        org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex)
-  (setq bibtex-completion-df-extension '(".pdf" ".djvu")
-        bibtex-completion-bibliography '("~/SynologyDrive/Org/roam/.reference.bib")
-        bibtex-completion-notes-path "~/SynologyDrive/Org/roam/reference"
-        bibtex-completion-pdf-field "file"))
+(after! citar
+  (setq! citar-bibliography'(~/SynologyDrive/Org/roam/.library.bib))
+  (setq! citar-notes-paths '(~/SynologyDrive/Org/roam))
 
-(use-package! org-roam-bibtex
-  :after org-roam
-  :hook (org-roam-mode . org-roam-bibtex-mode)
-  :config
-  (require 'org-ref)
-  (setq orb-preformat-keywords
-        '("citekey" "title" "url" "author-or-editor" "keywords" "file" "year")
-        orb-process-file-keyword t
-        orb-attached-file-extensions '("pdf")
-        orb-note-actions-interface 'default))
-;;自动创建笔记的创建时间和修改时间
-;; (use-package! org-roam-timestamps
-;;   :after org-roam
-;;   :config
-;;   (org-roam-timestamps-mode))
-;;跨文件的引用，能够实现笔记的一处修改，处处修改。
+  (setq citar-templates
+        '((main . "${author editor:30}     ${date year issued:4}     ${title:48}")
+          (suffix . "          ${=key= id:15}    ${=type=:12}    ${tags keywords:*}")
+          (preview . "${author editor} (${year issued date}) ${title}, ${journal journaltitle publisher container-title collection-title}.\n")
+          (note . "Notes on ${author editor} (${year issued date}) ${title}")))
+
+  (setq citar-symbols
+        `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
+          (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
+          (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
+
+  (setq citar-symbol-separator "  ")
+  (map! :leader :prefix "n"
+        "b" #'citar-insert-citation))
+
+;; automatically add timestamp for creation and modification.
+(use-package! org-roam-timestamps
+   :after org-roam
+   :config
+   (org-roam-timestamps-mode))
+
+;; references through files
 (use-package! org-transclusion
   :after org-roam)
 
