@@ -94,4 +94,6 @@
  "C-:" 'avy-goto-char-2
  "C-\"" 'avy-goto-word-or-subword-1
  "C-c c b" 'lsp-treemacs-symbols
+ "M-n" 'scroll-up-line
+ "M-p" 'scroll-down-line
  )
