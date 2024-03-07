@@ -94,6 +94,36 @@
  "C-:" 'avy-goto-char-2
  "C-\"" 'avy-goto-word-or-subword-1
  "C-c c b" 'lsp-treemacs-symbols
+ "C-c c f" 'lsp-format-region
  "M-n" 'scroll-up-line
- "M-p" 'scroll-down-line
- )
+ "M-p" 'scroll-down-line)
+
+(defun my/remote-docker-clangd ()
+  "Return the command to start clangd in the remote docker container."
+  '("ssh" "vm" "docker" "exec" "-i" "zbx_bde-liangchao-pnc-algo-dev" "clangd"))
+
+(add-hook 'lsp-mode-hook
+          (lambda ()
+            (when (file-remote-p default-directory)
+              (setq-local lsp-buffer-uri-fn
+                          (lambda (buffer)
+                            (with-current-buffer buffer
+                              (tramp-file-name-localname (tramp-dissect-file-name default-directory))))))))
+
+(use-package lsp-mode
+  :commands lsp
+  :hook (prog-mode . lsp)
+  :config
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-tramp-connection 'my/remote-docker-clangd)
+                    :major-modes '(c-mode c++-mode)
+                    :priority -1
+                    :remote? t
+                    :server-id 'clangd-remote-test)))
+
+(setq projectile-indexing-method 'alien)
+(setq projectile-verbose t)
+(setq tramp-verbose 10)
+(setq tramp-default-method "scp")
+(setq auto-save-default nil)
+(setq make-backup-files nil)
