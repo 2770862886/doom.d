@@ -127,3 +127,11 @@
 (setq tramp-default-method "scp")
 (setq auto-save-default nil)
 (setq make-backup-files nil)
+(setq tramp-persistency-file-name nil)
+(setq tramp-ssh-controlmaster-options
+      "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+(setq create-lockfiles nil)
