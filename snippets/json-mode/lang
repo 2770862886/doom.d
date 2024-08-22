@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: lang
+# uuid:
+# key: lang
+# condition: t
+# --
+
+,{
+    "id": $1,
+    "zhcn": "$2",
+    "eng": "$3"
+}

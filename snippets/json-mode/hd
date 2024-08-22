@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: header
+# uuid:
+# key: hd
+# condition: t
+# --
+{
+    "name": "$1",
+    "type": "$2",
+    "desc": "$3"
+}

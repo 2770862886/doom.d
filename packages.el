@@ -68,3 +68,5 @@
 
 (package! ob-racket
   :recipe (:host github :repo "hasu/emacs-ob-racket"))
+
+(package! rime)

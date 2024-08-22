@@ -286,6 +286,14 @@
           deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"
           deft-use-filename-as-title t))
 
+(use-package rime
+  :config
+     (setq default-input-method "rime")
+     (setq rime-user-data-dir (expand-file-name "~/Library/Rime"))  ;; 请根据您的 Rime 安装路径调整
+     (setq rime-librime-root "~/.emacs.d/librime/dist")
+     (setq rime-emacs-module-header-root "/opt/homebrew/Cellar/emacs-plus@29/29.3/include")
+)
+
 (after! rjsx-mode
   (setq js2-basic-offset 4))
 
