@@ -119,7 +119,11 @@
                     :major-modes '(c-mode c++-mode)
                     :priority -1
                     :remote? t
-                    :server-id 'clangd-remote-test)))
+                    :server-id 'clangd-remote-test))
+  (add-to-list
+   'lsp-language-id-configuration
+   '(emacs-lisp-mode . "emacs-lisp"))
+)
 
 (setq projectile-indexing-method 'alien)
 (setq projectile-verbose t)
