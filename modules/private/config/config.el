@@ -125,6 +125,10 @@
    '(emacs-lisp-mode . "emacs-lisp"))
 )
 
+(use-package vterm
+  :config
+   (setq vterm-shell "zsh"))
+
 (setq projectile-indexing-method 'alien)
 (setq projectile-verbose t)
 (setq tramp-verbose 10)
