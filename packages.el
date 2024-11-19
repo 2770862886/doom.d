@@ -63,8 +63,12 @@
 (package! org-ref
   :recipe (:host github :repo "jkitchin/org-ref"))
 
-(unpin! org-roam)
+;;(unpin! org-roam)
 (package! org-roam-ui)
+
+(package! emacsql :pin "491105a")
+(package! emacsql-sqlite3
+  :recipe (:host github :repo "cireu/emacsql-sqlite3"))
 
 (package! ob-racket
   :recipe (:host github :repo "hasu/emacs-ob-racket"))

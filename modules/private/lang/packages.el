@@ -3,3 +3,6 @@
 
 (package! adoc-mode
   :recipe (:host github :repo "sensorflo/adoc-mode"))
+
+(package! qml-mode)
+(package! company-qml)

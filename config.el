@@ -211,12 +211,16 @@
            :publishing-function org-publish-attachment)
           ("org" :components ("org-notes" "org-static")))))
 
+(use-package emacsql :ensure t)
+(use-package emacsql-sqlite3 :ensure t)
+
 (use-package org-roam
   :ensure t
   :init
   (setq org-roam-v2-ack t)
   :custom
   (org-roam-directory "~/SynologyDrive/Org/roam")
+  (org-roam-db-location "~/SynologyDrive/Org/roam/org-roam.db")
   (org-roam-complete-everywhere t)
   (org-roam-capture-templates '(
                 ("d" "default" plain "%?"
