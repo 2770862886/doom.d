@@ -341,7 +341,11 @@
 (setq display-line-numbers-type t)
 (setq gdb-many-windows t)
 
-
+;; (after! vterm
+;;   :config
+;;   (setopt vterm-keymap-exceptions
+;;           (append vterm-keymap-exceptions
+;;                  '("M-1" "M-2" "M-3" "M-4" "M-5" "M-6" "M-7" "M-8" "M-9"))))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
