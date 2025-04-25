@@ -219,8 +219,8 @@
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/SynologyDrive/Org/roam")
-  (org-roam-db-location "~/SynologyDrive/Org/roam/org-roam.db")
+  (org-roam-directory (concat org-directory "roam/"))
+  (org-roam-db-location (concat org-roam-directory "org-roam.db"))
   (org-roam-complete-everywhere t)
   (org-roam-capture-templates '(
                 ("d" "default" plain "%?"
@@ -243,9 +243,6 @@
   :config
   (org-roam-db-autosync-enable))
 
-(use-package! websocket
-  :after org-roam)
-
 (use-package! org-roam-ui
   :after org-roam
   :config
@@ -255,7 +252,7 @@
         org-roam-ui-open-on-start t))
 
 (after! citar
-  (setq! citar-bibliography'(~/SynologyDrive/Org/roam/.library.bib))
+  (setq! citar-bibliography '(~/SynologyDrive/Org/roam/.library.bib))
   (setq! citar-notes-paths '(~/SynologyDrive/Org/roam))
 
   (setq citar-templates
@@ -281,6 +278,9 @@
 
 ;; references through files
 (use-package! org-transclusion
+  :after org-roam)
+
+(use-package! websocket
   :after org-roam)
 
  (use-package deft
@@ -329,7 +329,7 @@
 (defun anki ()
   "Used to open default anki file."
   (interactive)
-  (find-file "~/SynologyDrive/anki/anki.org"))
+  (find-file anki-directory))
 
 (require 'exec-path-from-shell)
 (when (display-graphic-p)

@@ -91,7 +91,7 @@
        ;;biblio            ; Writes a PhD for you (citation needed)
        ;;collab            ; buffers with friends
        (debugger +lsp)     ; FIXME stepping through code, to help you add bugs
-       ;;direnv
+       direnv
        docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ein               ; tame Jupyter notebooks with emacs
@@ -99,8 +99,8 @@
        (lookup             ; navigate your code and its documentation
         +dictionary
         +docsets)
-       (lsp +peek)  ; M-x vscode
-       magit             ; a git porcelain for Emacs
+       lsp                 ; M-x vscodeg
+       magit               ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        ;;pdf               ; pdf enhancements

@@ -76,16 +76,15 @@
                   (dired-goto-file dir))))))
 
 (map!
- "C-x C-m" 'execute-extended-command
+ "C-c C-m" 'execute-extended-command
  "C-x 2" (split-window-func-with-other-buffer 'split-window-vertically)
  "C-x 3" (split-window-func-with-other-buffer 'split-window-horizontally)
- "C-x C-k" 'kill-region
+ "C-c C-k" 'kill-region
  "C-x /" 'comment-or-uncomment-region
  "S-<backspace>" 'doom/backward-kill-to-bol-and-indent
  "S-SPC" 'set-mark-command
  "C-w" 'backward-kill-word
  "C-c C-p" 'org-mark-ring-goto
- "C-c k" 'revert-buffer-with-coding-system
  "C-c p w" '+vertico/project-search
  "C-c o s" 'treemacs-select-window
  "C-c n i" 'inbox
