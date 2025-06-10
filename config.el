@@ -336,14 +336,17 @@
   (exec-path-from-shell-initialize))
 ;; ####
 
-(setq conda-anaconda-home (expand-file-name "~/sources/miniconda3")) ; 根据你的安装路径修改
-(setq conda-env-home-directory (expand-file-name "~/sources/miniconda3/envs"))
+(setq conda-anaconda-home (expand-file-name "~/miniconda3")) ; 根据你的安装路径修改
+(setq conda-env-home-directory (expand-file-name "~/miniconda3/envs"))
 
 (use-package! conda
   :config
   (conda-env-initialize-interactive-shells) ; 初始化交互式 shell
   (conda-env-initialize-eshell)             ; 初始化 eshell
   (setq conda-env-autoactivate-mode t))     ; 自动激活项目环境
+
+(after! conda
+  (conda-env-activate "emacs"))
 
 (after! lsp-pyright
   (setq lsp-pyright-python-executable-cmd "python"))
