@@ -331,6 +331,8 @@
   (interactive)
   (find-file anki-directory))
 
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 (require 'exec-path-from-shell)
 (when (display-graphic-p)
   (exec-path-from-shell-initialize))

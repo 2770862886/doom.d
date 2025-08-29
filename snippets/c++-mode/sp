@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: shared_ptr
+# key: shp
+# condition: t
+# --
+
+std::shared_ptr<${1:name}> `%`$0;

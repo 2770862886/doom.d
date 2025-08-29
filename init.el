@@ -171,7 +171,9 @@
         +present           ; using org-mode for presentations
         +pretty            ; yessss my pretties! (nice unicode symbols)
         +roam2)             ; wander around notes
-        ;;php               ; perl's insecure younger brother
+       (php
+        +lsp
+        +tree-sitter)    ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        graphviz          ; diagrams for confusing yourself even more
        ;;purescript        ; javascript, but functional
