@@ -24,3 +24,8 @@
     :new-connection (lsp-stdio-connection "qmlls")
     :major-modes '(qml-mode)
     :server-id 'qmlls)))
+
+(with-eval-after-load 'treesit
+  (setq treesit-language-source-alist
+        '((c   . ("https://github.com/tree-sitter/tree-sitter-c"))
+          (cpp . ("https://github.com/tree-sitter/tree-sitter-cpp")))))
