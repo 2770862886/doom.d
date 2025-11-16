@@ -220,7 +220,9 @@
   (setq org-roam-v2-ack t)
   :custom
   (org-roam-directory (concat org-directory "roam/"))
-  (org-roam-db-location (concat org-roam-directory "org-roam.db"))
+  (org-roam-db-location (concat org-roam-directory (cond (IS-LINUX "org-roam.db") 
+                                                         (IS-MAC "org-roam-osx.db")
+                                                         (IS-WINDOWS "org-roam-win.db"))))
   (org-roam-complete-everywhere t)
   (org-roam-capture-templates '(
                 ("d" "default" plain "%?"
