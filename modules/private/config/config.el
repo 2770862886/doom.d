@@ -2,10 +2,13 @@
 
 (setq indent-tabs-mode nil
       show-trailing-whitespace t
-      tab-width 4
+      tab-width 2
+      c-basic-offset 2
       scroll-step 1
       scroll-margin 3
       scroll-conservatively 10000)
+
+(setq-default tab-width 2)
 
 (setq consult-locate-command "mdfind -name")
 
@@ -86,7 +89,7 @@
  "C-w" 'backward-kill-word
  "C-c C-p" 'org-mark-ring-goto
  "C-c p w" '+vertico/project-search
- "C-c o s" 'treemacs-select-window
+ "C-c o a" 'treemacs-select-window
  "C-c n i" 'inbox
  "C-c n w" 'work
  "C-c n r u" 'org-roam-ui-mode
@@ -127,6 +130,17 @@
 (use-package vterm
   :config
    (setq vterm-shell "zsh"))
+
+(use-package! whitespace
+  :init
+  (setq whitespace-style '(face spaces tabs space-mark tab-mark trailing))
+  (setq whitespace-display-mappings
+        '((space-mark   ?\     [?\u00B7]     [?.])  ; 空格显示成中心点
+          (tab-mark     ?\t    [?\u00BB ?\t] [?\\ ?\t])))
+  :config
+  (global-whitespace-mode +1))
+
+(add-hook 'before-save-hook #'delete-trailing-whitespace)
 
 (setq projectile-indexing-method 'alien)
 (setq projectile-verbose t)
