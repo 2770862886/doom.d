@@ -29,3 +29,7 @@
   (setq treesit-language-source-alist
         '((c   . ("https://github.com/tree-sitter/tree-sitter-c"))
           (cpp . ("https://github.com/tree-sitter/tree-sitter-cpp")))))
+
+;; C/C++ 中 C-j 固定为仅换行并缩进，避免行尾（如 39 行 `;` 后）误删下一行
+(after! cc-mode
+  (define-key c-mode-base-map (kbd "C-j") #'c-context-line-break))

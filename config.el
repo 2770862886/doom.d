@@ -172,8 +172,8 @@
   ;; by liangchao, 2019.7.9
   (setq org-agenda-files
         (list (concat org-directory "inbox.org")
-              (concat org-directory "task.org")
               (concat org-directory "work.org")
+              (concat org-directory "task.org")
               (concat org-directory "tickler.org")
               (concat org-directory "someday.org")
               (concat org-directory "goals.org")))
@@ -219,7 +219,7 @@
   (setq org-roam-v2-ack t)
   :custom
   (org-roam-directory (concat org-directory "roam/"))
-  (org-roam-db-location (concat org-roam-directory (cond (IS-LINUX "org-roam.db") 
+  (org-roam-db-location (concat org-roam-directory (cond (IS-LINUX "org-roam.db")
                                                          (IS-MAC "org-roam-osx.db")
                                                          (IS-WINDOWS "org-roam-win.db"))))
   (org-roam-complete-everywhere t)
