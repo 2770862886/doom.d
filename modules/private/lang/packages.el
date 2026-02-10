@@ -6,3 +6,5 @@
 
 (package! qml-mode :recipe (:host github :repo "coldnew/qml-mode"))
 (package! company-qml)
+
+(package! protobuf-mode)

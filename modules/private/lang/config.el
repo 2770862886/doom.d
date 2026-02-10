@@ -33,3 +33,15 @@
 ;; C/C++ 中 C-j 固定为仅换行并缩进，避免行尾（如 39 行 `;` 后）误删下一行
 (after! cc-mode
   (define-key c-mode-base-map (kbd "C-j") #'c-context-line-break))
+
+;; Protobuf：.proto 与 .pb.txt/.pbtxt 文本格式共用同一模式
+(use-package! protobuf-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.pb\\.txt\\'" . protobuf-mode))
+  (add-to-list 'auto-mode-alist '("\\.pbtxt\\'" . protobuf-mode))
+  (add-hook 'protobuf-mode-hook
+            (lambda ()
+              (c-add-style "my-protobuf"
+                           '((c-basic-offset . 2)
+                             (indent-tabs-mode . nil))
+                           t))))
