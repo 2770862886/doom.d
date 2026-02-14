@@ -166,12 +166,12 @@
        (org               ; organize your plain life in plain text
         +dragndrop         ; drag & drop files/images into org buffers
         +gnuplot           ; who doesn't like pretty pictures
-        +hugo              ; use Emacs for hugo blogging
-        +ipython           ; enable iPython interation for babel
-        +journal           ;
-        +jupyter           ; ipython/jupyter support for babel
-        +noter             ; enhanced PDF notetaking
         +pandoc            ; export-with-pandoc support
+        +hugo              ; use Emacs for hugo blogging
+        +ipython           ; enable iPython interpretation for babel
+        +jupyter           ; ipython/jupyter support for babel
+        +journal           ;
+        +noter             ; enhanced PDF notetaking
         +pomodoro          ; be fruitful with the tomato technique
         +present           ; using org-mode for presentations
         +pretty            ; yessss my pretties! (nice unicode symbols)

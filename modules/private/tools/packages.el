@@ -5,7 +5,7 @@
   :recipe (:host github :repo "louietan/anki-editor"))
 
 (package! org-excalidraw
-  :recipe (:host github :repo "wdavew/org-excalidraw"))
+  :recipe (:host github :repo "2770862886/org-excalidraw"))
 
 (package! elfeed
   :recipe (:host github :repo "skeeto/elfeed"))

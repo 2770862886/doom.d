@@ -108,8 +108,6 @@
            "* %?\n %i")
           ("g" "Goal" entry (file+headline ,(concat org-directory "goals.org") "Goals")
            "* %?\n %i")
-          ("j" "Journal" entry (file+olp+datetree ,(concat org-directory "journal.org"))
-           "* %U - %^{heading}\n %?")
           ("v" "Anki Words" entry (file+headline org-my-anki-file "Vocabulary")
                "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: Vocabulary\n:END:\n** Front\n%?\n** Back\n%x\n")
           ("c" "Anki cloze" entry (file+headline org-my-anki-file "Dispatch Shelf")
