@@ -30,6 +30,28 @@
         '((c   . ("https://github.com/tree-sitter/tree-sitter-c"))
           (cpp . ("https://github.com/tree-sitter/tree-sitter-cpp")))))
 
+(defun +cc/company-append-method-params-h (candidate)
+  "Company 补全确认后，为 C++ 方法实现自动追加形参列表。"
+  (when (and (stringp candidate)
+             (bound-and-true-p eglot--managed-mode)
+             (derived-mode-p 'c++-mode 'c++-ts-mode 'c-mode 'c-ts-mode)
+             (not (looking-at-p "("))
+             (save-excursion
+               (let ((p (point)))
+                 (beginning-of-line)
+                 (re-search-forward "::" p t))))
+    (when-let* ((lsp-item (get-text-property 0 'eglot--lsp-item candidate))
+                (kind (plist-get lsp-item :kind))
+                ((eql kind 2))
+                (fmt (or (plist-get lsp-item :insertTextFormat) 1))
+                ((eql fmt 1))
+                (label (or (plist-get lsp-item :label) ""))
+                ((string-match "(.*" label)))
+      (insert (match-string 0 label)))))
+
+(after! company
+  (add-hook 'company-after-completion-hook #'+cc/company-append-method-params-h))
+
 ;; C/C++ 中 C-j 固定为仅换行并缩进，避免行尾（如 39 行 `;` 后）误删下一行
 (after! cc-mode
   (define-key c-mode-base-map (kbd "C-j") #'c-context-line-break))
