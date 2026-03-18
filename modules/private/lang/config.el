@@ -52,9 +52,17 @@
 (after! company
   (add-hook 'company-after-completion-hook #'+cc/company-append-method-params-h))
 
-;; C/C++ 中 C-j 固定为仅换行并缩进，避免行尾（如 39 行 `;` 后）误删下一行
-(after! cc-mode
-  (define-key c-mode-base-map (kbd "C-j") #'c-context-line-break))
+;; C/C++ 中禁用 electric-indent 的"回溯重缩进上一行"行为，
+;; 仅保留 newline-and-indent（只缩进新行），格式化统一交给 clang-format。
+(defun +cc-safe-newline-h ()
+  (setq-local electric-indent-inhibit t)
+  (local-set-key (kbd "RET") #'newline-and-indent)
+  (local-set-key (kbd "C-j") #'newline-and-indent))
+
+(add-hook 'c-mode-hook    #'+cc-safe-newline-h)
+(add-hook 'c++-mode-hook  #'+cc-safe-newline-h)
+(add-hook 'c-ts-mode-hook   #'+cc-safe-newline-h)
+(add-hook 'c++-ts-mode-hook #'+cc-safe-newline-h)
 
 ;; Protobuf：.proto 与 .pb.txt/.pbtxt 文本格式共用同一模式
 (use-package! protobuf-mode

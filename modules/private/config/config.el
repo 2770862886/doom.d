@@ -112,6 +112,9 @@
                             (with-current-buffer buffer
                               (tramp-file-name-localname (tramp-dissect-file-name default-directory))))))))
 
+(after! eglot
+  (add-to-list 'eglot-ignored-server-capabilities :documentOnTypeFormattingProvider))
+
 (use-package lsp-mode
   :commands lsp
   :hook (prog-mode . lsp)

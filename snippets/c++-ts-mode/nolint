@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: NOLINT subdir
+# key: nlti
+# --
+
+// NOLINT(build/include_subdir)$0
