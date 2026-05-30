@@ -44,7 +44,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-dark+)
+(setq doom-theme 'doom-monokai-spectrum)
 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
@@ -70,8 +70,8 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/SynologyDrive/Org/")
-(setq anki-directory "~/SynologyDrive/Anki/")
+(setq org-directory "~/SynologyDrive/org/")
+(setq anki-directory "~/SynologyDrive/anki/")
 (setq template-directory "~/SynologyDrive/templates/")
 
 (setq org-reverse-note-order t)
@@ -83,6 +83,7 @@
        '((C             . t)
          (dot           . t)
          (emacs-lisp    . t)
+         (mermaid       . t)
          (gnuplot       . t)
          (latex         . t)
          (ledger        . t)
@@ -251,8 +252,8 @@
         org-roam-ui-open-on-start t))
 
 (after! citar
-  (setq! citar-bibliography '(~/SynologyDrive/Org/roam/.library.bib))
-  (setq! citar-notes-paths '(~/SynologyDrive/Org/roam))
+  (setq! citar-bibliography '(~/SynologyDrive/org/roam/.library.bib))
+  (setq! citar-notes-paths '(~/SynologyDrive/org/roam))
 
   (setq citar-templates
         '((main . "${author editor:30}     ${date year issued:4}     ${title:48}")

@@ -74,3 +74,5 @@
   :recipe (:host github :repo "hasu/emacs-ob-racket"))
 
 (package! rime)
+
+(package! ob-mermaid)
