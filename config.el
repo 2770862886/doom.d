@@ -113,13 +113,18 @@
                "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: Vocabulary\n:END:\n** Front\n%?\n** Back\n%x\n")
           ("c" "Anki cloze" entry (file+headline org-my-anki-file "Dispatch Shelf")
                "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Mega\n:END:\n** Text\n%x\n** Extra\n")
-          ("d" "Review: Daily Review" entry (file+olp+datetree "/tmp/reviews.org")
+          ("j" "Journal" entry (file+datetree ,(concat org-directory "journal/journal.org"))
+           "* %<%H:%M> %?
+- 做了啥：
+- 学到了：
+- 明天要：")
+          ("d" "Review: Daily Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org"))
            (file ,(concat template-directory "dailyreviewtemplate.org")))
-          ("w" "Review: Weekly Review" entry (file+olp+datetree "/tmp/reviews.org")
+          ("w" "Review: Weekly Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org"))
            (file ,(concat template-directory "weeklyreviewtemplate.org")))
-          ("m" "Review: Monthly Review" entry (file+olp+datetree "/tmp/reviews.org")
+          ("m" "Review: Monthly Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org"))
            (file ,(concat template-directory "monthlyreviewtemplate.org")))
-          ("y" "Review: Annual Review" entry (file+olp+datetree "/tmp/reviews.org")
+          ("y" "Review: Annual Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org"))
            (file ,(concat template-directory "annualreviewtemplate.org")))
         ))
 
@@ -385,3 +390,6 @@
 (after! server
   (unless (server-running-p)
     (server-start)))
+
+;; 日记快捷方式：C-c j 直接写日记
+(map! :map global-map "C-c j" (lambda () (interactive) (org-capture nil "j")))
