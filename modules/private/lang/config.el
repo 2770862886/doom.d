@@ -17,13 +17,10 @@
   :config
   (add-to-list 'company-backends 'company-qml))
 
-(after! lsp-mode
-  (add-to-list 'lsp-language-id-configuration '(qml-mode . "qml"))
-  (lsp-register-client
-   (make-lsp-client
-    :new-connection (lsp-stdio-connection "qmlls")
-    :major-modes '(qml-mode)
-    :server-id 'qmlls)))
+;; Register qmlls (the QML LSP server) with eglot.
+;; Replaces the old lsp-mode `lsp-register-client' block.
+(after! eglot
+  (add-to-list 'eglot-server-programs '(qml-mode . ("qmlls"))))
 
 (with-eval-after-load 'treesit
   (setq treesit-language-source-alist

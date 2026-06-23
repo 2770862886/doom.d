@@ -97,7 +97,7 @@
   (setq org-capture-templates
         `(("i" "Inbox" entry (file+headline ,(concat org-directory "inbox.org") "Inbox")
            "* TODO %?\n %i")
-          ("t" "Task" entry (file+headligne ,(concat org-directory "task.org") "Tasks")
+          ("t" "Task" entry (file+headline ,(concat org-directory "task.org") "Tasks")
            "* TODO %?\n %i")
           ("p" "Project" entry (file+headline ,(concat org-directory "task.org") "Projects")
            (file (concat template-directory "newprojecttemplate.org")))
@@ -212,7 +212,14 @@
            :publishing-directory "~/note/public/html"
            :recursive t
            :publishing-function org-publish-attachment)
-          ("org" :components ("org-notes" "org-static")))))
+          ("org" :components ("org-notes" "org-static"))))
+
+  ;; Habit tracking settings
+  (setq org-habit-show-habits-only-for-today nil)
+  (setq org-habit-show-all-today t)
+  (setq org-habit-graph-column 60)
+  (setq org-habit-preceding-days 28)
+  (setq org-habit-following-days 7))
 
 (use-package emacsql :ensure t)
 (use-package emacsql-sqlite3 :ensure t)
@@ -241,6 +248,11 @@
                                      "#+TITLE: ${title}\n")
                  :unnarrowed t)
                 ))
+  (org-roam-dailies-capture-templates '(
+                ("d" "default" entry "* %?"
+                 :target (file+head "%<%Y-%m-%d>.org"
+                                    "#+TITLE: Daily Note - %<%Y-%m-%d>\n#+STARTUP: content\n#+TAGS: fleeting(f) question(q) todo(t) idea(i) link(l)\n")
+                 :unnarrowed t)))
   :bind (("C-c n b" . org-roam-buffer-toggle)
          ("C-c n r b" . org-roam-update-org-id-locations)
          :map org-mode-map
@@ -391,5 +403,13 @@
   (unless (server-running-p)
     (server-start)))
 
-;; 日记快捷方式：C-c j 直接写日记
-(map! :map global-map "C-c j" (lambda () (interactive) (org-capture nil "j")))
+;; NOTE: There was a spurious face-inheritance cycle in doom-themes that
+;;   crashed company-box ("Face inheritance results in inheritance cycle:
+;;   gnus-group-news-low"). The fix is applied directly to
+;;   ~/.emacs.d/.local/straight/repos/themes/doom-themes-base.el (one line
+;;   edit), where doom-themes redefined
+;;     gnus-group-news-low-empty :inherit gnus-group-news-low
+;;   in a way that formed a cycle with Emacs 31's built-in face spec. It now
+;;   inherits `gnus-group-mail-1-empty' (matching its sibling empty faces).
+;;   If doom-themes is reinstalled (doom sync --rebuild), this edit will be
+;;   lost and needs to be reapplied.)

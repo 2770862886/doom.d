@@ -51,6 +51,14 @@
 
 (package! exec-path-from-shell)
 
+;; Ensure package-lint-flymake is built as its own package.
+;; Doom's lang/emacs-lisp module declares this but pulls package-lint with
+;; `:exclude "*flymake.el"', which prevents the flymake variant from being
+;; built. Declaring it here forces straight to install it standalone, which
+;; silences "Cannot open load file: package-lint" errors when global-flycheck-mode
+;; eagerly loads its emacs-lisp checkers.
+(package! package-lint-flymake :pin "7e2dfcf99011fa82d92baba973841db717657964")
+
 (package! org-roam-timestamps
   :recipe (:host github :repo "ThomasFKJorna/org-roam-timestamps"))
 

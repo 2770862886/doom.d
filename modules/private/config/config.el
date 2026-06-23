@@ -95,44 +95,41 @@
  "C-c n r u" 'org-roam-ui-mode
  "C-:" 'avy-goto-char-2
  "C-\"" 'avy-goto-word-or-subword-1
- "C-c c b" 'lsp-treemacs-symbols
- "C-c c f" 'lsp-format-region
+ "C-c c b" 'consult-imenu
+ "C-c c f" 'eglot-format
  "M-n" 'scroll-up-line
  "M-p" 'scroll-down-line)
 
-(defun my/remote-docker-clangd ()
-  "Return the command to start clangd in the remote docker container."
-  '("ssh" "vm" "docker" "exec" "-i" "zbx_bde-liangchao-pnc-algo-dev" "clangd"))
-
-(add-hook 'lsp-mode-hook
-          (lambda ()
-            (when (file-remote-p default-directory)
-              (setq-local lsp-buffer-uri-fn
-                          (lambda (buffer)
-                            (with-current-buffer buffer
-                              (tramp-file-name-localname (tramp-dissect-file-name default-directory))))))))
+;; Remote docker clangd for eglot.
+;;
+;; Strategy:
+;; - Local buffers (default-directory is not remote): use the system
+;;   `clangd' at /usr/bin/clangd (already installed via Xcode CLT).
+;;
+;; - Remote buffers under /ssh:vm:...: eglot runs the server program ON the
+;;   remote host (it uses `file-remote-p' to decide). So we register a
+;;   docker-wrapped clangd for remote c/c++ buffers; eglot will execute
+;;   `docker exec ... clangd' on `vm' for us.
+;;
+;; Note: eglot does NOT fall back to other entries in `eglot-server-programs'
+;; if our function returns nil. We must always return a real command list.
+(defun my/clangd-command (&rest _)
+  "Return the clangd command list for the current buffer.
+Remote docker clangd for /ssh:vm:... files; otherwise the local `clangd'."
+  (if (file-remote-p default-directory)
+      '("docker" "exec" "-i" "zbx_bde-liangchao-pnc-algo-dev" "clangd")
+    '("clangd")))
 
 (after! eglot
-  (add-to-list 'eglot-ignored-server-capabilities :documentOnTypeFormattingProvider))
+  (add-to-list 'eglot-ignored-server-capabilities :documentOnTypeFormattingProvider)
+  ;; Prepend our dispatcher above eglot's built-in `clangd' default; both
+  ;; resolve to the same local binary for local files.
+  (add-to-list 'eglot-server-programs
+               `((c-mode c++-mode c-ts-mode c++-ts-mode) . my/clangd-command)))
 
-(use-package lsp-mode
-  :commands lsp
-  :hook (prog-mode . lsp)
+(use-package! vterm
   :config
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-tramp-connection 'my/remote-docker-clangd)
-                    :major-modes '(c-mode c++-mode)
-                    :priority -1
-                    :remote? t
-                    :server-id 'clangd-remote-test))
-  (add-to-list
-   'lsp-language-id-configuration
-   '(emacs-lisp-mode . "emacs-lisp"))
-)
-
-(use-package vterm
-  :config
-   (setq vterm-shell "zsh"))
+  (setq vterm-shell "zsh"))
 
 (use-package! whitespace
   :init
