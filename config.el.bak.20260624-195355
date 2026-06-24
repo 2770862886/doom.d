@@ -105,29 +105,26 @@
            "* %?\n %i")
           ("b" "Maybe" entry (file+headline ,(concat org-directory "someday.org") "Maybe")
            "* %?\n %i")
-          ;; "n" Note → 已迁移到 org-roam；新建笔记请用 C-c n n (org-roam-capture)
+          ("n" "Note" entry (file+headline ,(concat org-directory "note.org") "Notes")
+           "* %?\n %i")
           ("g" "Goal" entry (file+headline ,(concat org-directory "goals.org") "Goals")
            "* %?\n %i")
           ("v" "Anki Words" entry (file+headline org-my-anki-file "Vocabulary")
                "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: Vocabulary\n:END:\n** Front\n%?\n** Back\n%x\n")
           ("c" "Anki cloze" entry (file+headline org-my-anki-file "Dispatch Shelf")
                "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Mega\n:END:\n** Text\n%x\n** Extra\n")
-          ("j" "Journal (→ 今日 daily note)" entry (file my/today-daily-file)
+          ("j" "Journal" entry (file+datetree ,(concat org-directory "journal/journal.org"))
            "* %<%H:%M> %?
 - 做了啥：
 - 学到了：
 - 明天要：")
-          ("l" "Log (事件记录)" entry (file+datetree ,(concat org-directory "log.org"))
-           "* %<%H:%M> %? %^g
-%a
-")
-          ("d" "Review: Daily Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org") "Daily Reviews")
+          ("d" "Review: Daily Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org"))
            (file ,(concat template-directory "dailyreviewtemplate.org")))
-          ("w" "Review: Weekly Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org") "Weekly Reviews")
+          ("w" "Review: Weekly Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org"))
            (file ,(concat template-directory "weeklyreviewtemplate.org")))
-          ("m" "Review: Monthly Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org") "Monthly Reviews")
+          ("m" "Review: Monthly Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org"))
            (file ,(concat template-directory "monthlyreviewtemplate.org")))
-          ("y" "Review: Annual Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org") "Annual Reviews")
+          ("y" "Review: Annual Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org"))
            (file ,(concat template-directory "annualreviewtemplate.org")))
         ))
 
@@ -187,16 +184,15 @@
 
   (setq org-agenda-text-search-extra-files
         (list (concat org-directory "someday.org")
-              (concat org-directory "log.org")))
+              (concat org-directory "note.org")))
 
-  (setq org-refile-targets
-        `((,(concat org-directory "task.org") :maxlevel . 3)
-          (,(concat org-directory "work.org") :maxlevel . 3)
-          (,(concat org-directory "someday.org") :level . 1)
-          (,(concat org-directory "tickler.org") :maxlevel . 2)))
-  (setq org-refile-use-outline-path 'file
-        org-outline-path-complete-in-steps t
-        org-refile-allow-creating-parent-nodes 'confirm)
+  ;; (setq org-refile-targets
+  ;;       '(
+  ;;         ((concat org-directory "task.org") :maxlevel . 3)
+  ;;         ((concat org-directory "work.org") :maxlevel . 3)
+  ;;         ((concat org-directory "someday.org") :level . 1)
+  ;;         ((concat org-directory "tickler.org") :maxlevel . 2)
+  ;;         ))
 
   (setq org-archive-location (concat "archive/archive-"
                                      (format-time-string "%Y%m" (current-time)) ".org_archive::"))
@@ -352,20 +348,6 @@
   (interactive)
   (find-file anki-directory))
 
-(defun my/today-daily-file ()
-  "Return the path to today's org-roam daily note, creating a stub if absent.
-Used as the capture target for the journal (\"j\") template so that daily
-reflection lands in the same place as org-roam-dailies (roam/daily/YYYY-MM-DD.org)."
-  (let* ((daily-dir (file-name-as-directory (concat org-roam-directory "daily/")))
-         (path (expand-file-name (format-time-string "%Y-%m-%d.org") daily-dir)))
-    (unless (file-exists-p path)
-      (make-directory daily-dir t)
-      (with-temp-file path
-        (insert (concat "#+TITLE: Daily - " (format-time-string "%Y-%m-%d") "\n"
-                        "#+STARTUP: content\n"
-                        "#+TAGS: fleeting(f) question(q) todo(t) idea(i) link(l)\n"))))
-    path))
-
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 (require 'exec-path-from-shell)
@@ -457,22 +439,6 @@ reflection lands in the same place as org-roam-dailies (roam/daily/YYYY-MM-DD.or
       :desc "查词 osx(输入)"       "C-c d I" #'osx-dictionary-search-input
       :desc "查词 osx(光标处)"     "C-c d P" #'osx-dictionary-search-pointer
       :desc "查词→复制(给 Anki)"  "C-c d a" #'my/sdcv-pointer-then-copy)
-
-;; #### Password Store (pass) / 密码管理
-;; 工作流: pass 存通用密码; .authinfo.gpg 喂给 Emacs auth; org-roam 只记元信息
-(use-package! password-store
-  :config
-  (setq password-store-password-length 20)
-  ;; 方案 A: Emacs auth (Magit/TRAMP/SMTP) 统一从 pass 读取，.authinfo.gpg 退役
-  (auth-source-pass-enable)
-  (setq auth-sources '(password-store)))
-
-(use-package! pass
-  :commands pass
-  :config
-  (setq pass-show-keybinding nil))
-
-(map! :desc "密码库 pass" "C-c p" #'pass)
 
 ;; Start Emacs Server
 (after! server

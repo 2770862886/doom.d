@@ -88,3 +88,8 @@
 ;; #### Dictionary / 查词
 (package! sdcv)
 (package! osx-dictionary)
+
+;; #### Password Store (pass) / 密码管理
+;; 前置: brew install pass && pass init <你的GPG指纹>
+(package! password-store)
+(package! pass)

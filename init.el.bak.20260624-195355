@@ -170,7 +170,7 @@
         +hugo              ; use Emacs for hugo blogging
         +ipython           ; enable iPython interpretation for babel
         +jupyter           ; ipython/jupyter support for babel
-        ;; +journal removed ; 统一到 org-roam-dailies (roam/daily)
+        +journal           ;
         +noter             ; enhanced PDF notetaking
         +pomodoro          ; be fruitful with the tomato technique
         +present           ; using org-mode for presentations
