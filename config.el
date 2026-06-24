@@ -398,6 +398,48 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; #### Dictionary / 查词 (sdcv 离线 + osx-dictionary 兜底)
+;; by liangchao, 2026.06.24
+;;
+;; 前置准备:
+;;   • sdcv:        brew install sdcv ; 把 StarDict 词典(.ifo/.idx/.dz)放到 ~/.stardict/dic/
+;;                  词典书名以 `sdcv -l` 的输出为准; 默认显示所有词典,
+;;                  想精简可取消下面 sdcv-dictionary-*-list 的注释并填准确书名
+;;   • osx-dictionary: 首次用 M-x osx-dictionary-install-cli 安装命令行辅助
+(use-package! sdcv
+  :commands (sdcv-search-input sdcv-search-pointer)
+  :config
+  (setq sdcv-say-word-p t                                  ;; 朗读单词
+        sdcv-dictionary-data-dir (expand-file-name "~/.stardict/dic"))
+  ;; 默认显示 ~/.stardict/dic 下全部词典;
+  ;; 装好词典后跑 `sdcv -l` 拿到准确书名, 取消下面注释并填入即可精简显示:
+  ;; (setq sdcv-dictionary-simple-list   '("朗道英汉字典5.0")
+  ;;       sdcv-dictionary-complete-list '("朗道英汉字典5.0" "Collins"))
+  )
+
+(use-package! osx-dictionary
+  :commands (osx-dictionary-search-input osx-dictionary-search-pointer)
+  ;; 想要 buffer 内单词高亮, 取消下一行注释 (osx-dictionary-mode 1)
+  )
+
+;; 查词并把释义复制到剪贴板, 配合 Anki capture 模板 "v" 粘贴
+(defun my/sdcv-pointer-then-copy ()
+  "查光标处单词并把 *sdcv* 缓冲区内容复制到剪贴板(便于 Anki capture 粘贴)."
+  (interactive)
+  (call-interactively #'sdcv-search-pointer)
+  (let ((buf (get-buffer "* sdcv *")))
+    (when buf
+      (with-current-buffer buf
+        (clipboard-kill-ring-save (point-min) (point-max))))))
+
+;; 按键 (C-c d 前缀, 全局生效, 无需 leader)
+(which-key-add-key-based-replacements "C-c d" "dictionary/查词")
+(map! :desc "查词 sdcv(输入)"      "C-c d i" #'sdcv-search-input
+      :desc "查词 sdcv(光标处)"    "C-c d p" #'sdcv-search-pointer
+      :desc "查词 osx(输入)"       "C-c d I" #'osx-dictionary-search-input
+      :desc "查词 osx(光标处)"     "C-c d P" #'osx-dictionary-search-pointer
+      :desc "查词→复制(给 Anki)"  "C-c d a" #'my/sdcv-pointer-then-copy)
+
 ;; Start Emacs Server
 (after! server
   (unless (server-running-p)

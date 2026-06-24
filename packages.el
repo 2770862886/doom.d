@@ -84,3 +84,7 @@
 (package! rime)
 
 (package! ob-mermaid)
+
+;; #### Dictionary / 查词
+(package! sdcv)
+(package! osx-dictionary)
