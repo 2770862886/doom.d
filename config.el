@@ -458,21 +458,14 @@ reflection lands in the same place as org-roam-dailies (roam/daily/YYYY-MM-DD.or
       :desc "查词 osx(光标处)"     "C-c d P" #'osx-dictionary-search-pointer
       :desc "查词→复制(给 Anki)"  "C-c d a" #'my/sdcv-pointer-then-copy)
 
-;; #### Password Store (pass) / 密码管理
-;; 工作流: pass 存通用密码; .authinfo.gpg 喂给 Emacs auth; org-roam 只记元信息
-(use-package! password-store
-  :config
-  (setq password-store-password-length 20)
-  ;; 方案 A: Emacs auth (Magit/TRAMP/SMTP) 统一从 pass 读取，.authinfo.gpg 退役
-  (auth-source-pass-enable)
-  (setq auth-sources '(password-store)))
-
-(use-package! pass
-  :commands pass
-  :config
-  (setq pass-show-keybinding nil))
-
-(map! :desc "密码库 pass" "C-c p" #'pass)
+;; #### Password Store → 改用 doom :tools pass 模块 (init.el: (pass +auth))
+;; 仅保留模块未提供的个性化设置：
+(after! password-store
+  (setq password-store-password-length 20))   ; 模块默认 12，改 20
+(after! auth-source-pass
+  (setq auth-sources '(password-store)))      ; 仅从 pass 取密，.authinfo.gpg 退役
+;; 打开密码库：全局单键 C-c z (Emacs 约定 C-c <字母> 预留给用户; 避开 projectile 的 C-c p)
+(map! :desc "密码库 pass" "C-c z" #'pass)
 
 ;; Start Emacs Server
 (after! server

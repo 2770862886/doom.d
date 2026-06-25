@@ -89,7 +89,5 @@
 (package! sdcv)
 (package! osx-dictionary)
 
-;; #### Password Store (pass) / 密码管理
-;; 前置: brew install pass && pass init <你的GPG指纹>
-(package! password-store)
-(package! pass)
+;; #### Password Store → 改用 doom 官方模块 :tools pass
+;; 在 init.el 里启用 (pass +auth)，无需在此手动声明 package
