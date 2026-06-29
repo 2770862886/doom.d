@@ -113,14 +113,9 @@
           ("c" "Anki cloze" entry (file+headline org-my-anki-file "Dispatch Shelf")
                "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Mega\n:END:\n** Text\n%x\n** Extra\n")
           ("j" "Journal (→ 今日 daily note)" entry (file my/today-daily-file)
-           "* %<%H:%M> %?
-- 做了啥：
-- 学到了：
-- 明天要：")
+           "* %<%H:%M> %?\n- 做了啥：\n- 学到了：\n- 明天要：")
           ("l" "Log (事件记录)" entry (file+datetree ,(concat org-directory "log.org"))
-           "* %<%H:%M> %? %^g
-%a
-")
+           "* %<%H:%M> %? %^g\n%a")
           ("d" "Review: Daily Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org") "Daily Reviews")
            (file ,(concat template-directory "dailyreviewtemplate.org")))
           ("w" "Review: Weekly Review" entry (file+olp+datetree ,(concat org-directory "journal/reviews.org") "Weekly Reviews")
