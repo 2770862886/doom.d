@@ -49,12 +49,17 @@
 (after! company
   (add-hook 'company-after-completion-hook #'+cc/company-append-method-params-h))
 
-;; C/C++ 中禁用 electric-indent 的"回溯重缩进上一行"行为，
-;; 仅保留 newline-and-indent（只缩进新行），格式化统一交给 clang-format。
+;; 仅保留 newline-and-indent（只缩进新行）；C-j 用 eglot(clangd) 格式化当前行。
+(defun +cc/format-line ()
+  "用 eglot(clangd) 格式化当前行；无 LSP 连接时静默跳过。"
+  (interactive)
+  (when (bound-and-true-p eglot--managed-mode)
+    (eglot-format (line-beginning-position) (line-end-position))))
+
 (defun +cc-safe-newline-h ()
   (setq-local electric-indent-inhibit t)
   (local-set-key (kbd "RET") #'newline-and-indent)
-  (local-set-key (kbd "C-j") #'newline-and-indent))
+  (local-set-key (kbd "C-j") #'+cc/format-line))
 
 (add-hook 'c-mode-hook    #'+cc-safe-newline-h)
 (add-hook 'c++-mode-hook  #'+cc-safe-newline-h)
