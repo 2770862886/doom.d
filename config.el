@@ -307,8 +307,8 @@
 (use-package! d2-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.d2\\'" . d2-mode))
-  ;; SVG 在 emacs buffer 内渲染有 bug (d2-mode#13), 优先 PNG
-  (setq d2-output-format ".png"
+  ;; PNG 出图需 Playwright 驱动(本机下载 404), SVG 全本地可用
+  (setq d2-output-format ".svg"
         d2-location "d2"))
 
  (use-package deft
