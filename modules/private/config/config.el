@@ -30,12 +30,6 @@
    "C-c u" 'move-dup-duplicate-up
    "C-c d" 'move-dup-duplicate-down))
 
-(use-package! goto-chg
-  :config
-  (map!
-   "C-," 'goto-last-change
-   "C-." 'goto-last-change-reverse))
-
 (eval-after-load "dired"
   '(progn
      (defadvice dired-advertised-find-file (around dired-subst-directory activate)
@@ -156,3 +150,13 @@ Remote docker clangd for /ssh:vm:... files; otherwise the local `clangd'."
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 (setq create-lockfiles nil)
+
+(use-package! embark
+  :bind
+  ("C-." . embark-act)
+  ("C-," . embark-dwim)
+  :custom
+  (embark-indicators '(embark-mixed-indicator embark-highlight-indicator)))
+
+(use-package! embark-consult
+  :after (embark consult))

@@ -84,6 +84,7 @@
          (dot           . t)
          (emacs-lisp    . t)
          (mermaid       . t)
+         (d2            . t)
          (gnuplot       . t)
          (latex         . t)
          (ledger        . t)
@@ -300,6 +301,15 @@
 
 (use-package! websocket
   :after org-roam)
+
+;; #### d2 图表 (OrbbecSDK 类图/架构图)
+;; 需要 d2 二进制: brew install d2
+(use-package! d2-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.d2\\'" . d2-mode))
+  ;; SVG 在 emacs buffer 内渲染有 bug (d2-mode#13), 优先 PNG
+  (setq d2-output-format ".png"
+        d2-location "d2"))
 
  (use-package deft
     :config

@@ -84,6 +84,8 @@
 (package! rime)
 
 (package! ob-mermaid)
+(package! ob-d2)
+(package! d2-mode)
 
 ;; #### Dictionary / 查词
 (package! sdcv)
